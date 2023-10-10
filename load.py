@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 import pandas as pd
 import mysql.connector
 def load():
-    mydb=mysql.connector.connect(host='127.0.0.1',user='root',passwd='Waheguru123',database='mydb')
+    mydb=mysql.connector.connect(host='127.0.0.1',user='root',passwd='12345',database='mydb')
     mycursor=mydb.cursor()
     mycursor.execute('SELECT * FROM mydb.customer_complains ')
     result=mycursor.fetchall()
