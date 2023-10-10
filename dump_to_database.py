@@ -4,7 +4,7 @@ import Extract as e
 import load as l
 import json
 import transform as t
-mydb=mysql.connector.connect(host='127.0.0.1',user='root',passwd='Azm123at@1',database='complains')
+mydb=mysql.connector.connect(host='127.0.0.1',user='root',passwd='12345',database='complains')
 
 
 
