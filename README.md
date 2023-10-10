@@ -19,7 +19,7 @@ airflow users create \
     --firstname Peter \
     --lastname Parker \
     --role Admin \
-    --email spiderman@superhero.org
+    --email rs419222@gmail.com
 
 airflow webserver --port 8080
 
