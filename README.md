@@ -1,27 +1,26 @@
-export AIRFLOW_HOME=~/airflow
+How to get all US States: You will use this list for Recursion on API to get all states Data.
 
-AIRFLOW_VERSION=2.7.1
+list_of_states=list(requests.get("https://gist.githubusercontent.com/mshafrir/2646763/raw/8b0dbb93521f5d6889502305335104218454c2bf/states_hash.json").json().keys())
 
-# Extract the version of Python you have installed. If you're currently using Python 3.11 you may want to set this manually as noted above, Python 3.11 is not yet supported.
-PYTHON_VERSION="$(python --version | cut -d " " -f 2 | cut -d "." -f 1-2)"
+2. API Hit URL
 
-CONSTRAINT_URL="https://raw.githubusercontent.com/apache/airflow/constraints-${AIRFLOW_VERSION}/constraints-${PYTHON_VERSION}.txt"
-# For example this would install 2.7.1 with python 3.8: https://raw.githubusercontent.com/apache/airflow/constraints-2.7.1/constraints-3.8.txt
+url = 'https://www.consumerfinance.gov/data-research/consumer-complaints/search/api/v1/?field=complaint_what_happened&size={size}&date_received_max={}&date_received_min={}&state={}'
 
-pip install "apache-airflow==${AIRFLOW_VERSION}" --constraint "${CONSTRAINT_URL}"
+3. Example Scrapping of Data for Washington State for Today (Remember : You have to put a Loop through all States)
 
-airflow standalone
+from datetime import date, datetime, timedelta
 
-airflow db migrate
+size=500
+time_delta=365
+max_date = (date.today()).strftime("%Y-%m-%d")
+min_date = (date.today() - timedelta(days=time_delta)).strftime("%Y-%m-%d")
 
-airflow users create \
-    --username admin \
-    --firstname Peter \
-    --lastname Parker \
-    --role Admin \
-    --email rs419222@gmail.com
+state='WA'
 
-airflow webserver --port 8080
+print(url.format(size,max_date, min_date, state))
 
-airflow scheduler
+import requests
 
+results=requests.get(url.format(size,max_date, min_date, state)).json()
+
+4. Dumping Data into Google Sheets : See Mentioned Video and Code Repo
